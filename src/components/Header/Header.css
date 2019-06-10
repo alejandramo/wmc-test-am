@@ -1,0 +1,7 @@
+.header {
+    display: flex;
+}
+
+.btn.btn-primary{
+    width: 2px;
+}

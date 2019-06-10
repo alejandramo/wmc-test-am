@@ -1,47 +1,38 @@
 import React from 'react';
+// importar bootstrap
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-/*
-function Login(props) {
-  return (
-    <div >
-        {props.name}
-    </div>
-  );
-}
-*/
-/*
-// Otra manera de definir la función de arriba
-const Login = ({name}) => (
-    <div>
-        {name}
-    </div>
-);
-*/
+const Login = () => (
 
-class Login extends React.Component{
-    // eslint-disable-next-line
-    constructor(props){
-        super(props);
-        this.state = {
-            clicked: false,
-            name: this.props.name,
-        };
-        this.changeClicked = this.changeClicked.bind(this);
-    }
+  <Modal.Dialog>
+    <Modal.Header>
+      <Modal.Title>Log In</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
 
-    changeClicked(event){
-        console.log(event.target);
-        this.setState({clicked: !this.state.clicked})
-    }
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group controlId="formBasicChecbox">
+        <Form.Check type="checkbox" label="Remember Me" />
+      </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Modal.Footer>
+  </Modal.Dialog>
 
-    render(){
-        return (
-            <div onClick={this.changeClicked}>
-                {this.state.name}
-                {this.state.clicked.toString()}
-            </div>
-        )
-    }
-}
-
+)
 export default Login;

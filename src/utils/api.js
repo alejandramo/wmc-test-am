@@ -33,7 +33,7 @@ function getDataWithQuery(queryObject, path) {
 
 
 
-export default {
+export {
   getData,
   getDataWithQuery,
 }

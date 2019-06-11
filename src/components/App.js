@@ -1,5 +1,9 @@
 import React from 'react';
 
+// npm i -s react-router-dom
+import BrowserRouter from 'react-router-dom/BrowserRouter';
+import Route from 'react-router-dom/Route';
+
 //Componentes
 import Login from './Login/Login';
 import Header from './Header/Header';
@@ -13,11 +17,11 @@ function App() {
     {id: '4', name: 'Name 4', description: 'Description 4', value: 5},
   ];
   return (
-    <div className="App">
-      <Header />
-      <Login  />
-      <List items={items} />
-    </div>
+    <BrowserRouter>
+      <Route component ={Header}/>
+      <Route exact path ="/" component = {Login}/>
+      <Route path = "/list" component={List} />
+    </BrowserRouter>
   );
 }
 

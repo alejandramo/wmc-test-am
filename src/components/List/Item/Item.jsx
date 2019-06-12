@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import {deleteData} from '../../../utils/api'
+
 // Components
 import UpdateItem from '../UpdateItem/UpdateItem';
 
@@ -14,6 +16,7 @@ class Item extends Component {
     this.increaseClick = this.increaseClick.bind(this);
     this.editItem = this.editItem.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.removeItem= this.removeItem.bind(this);
   }
 
   increaseClick() {
@@ -30,6 +33,9 @@ class Item extends Component {
     this.props.updateList();
   }
 
+  removeItem (){
+      deleteData('items', this.props.id).then(this.props.updateList).catch(console.log);
+  }
   render() {
     const {id, name, description, value} = this.props;
     return (
@@ -41,6 +47,7 @@ class Item extends Component {
         <td>{this.state.clicked}</td>
         <td>{this.props.id === this.props.lastClicked && 'Last Clicked'}</td>
         <td onClick={this.editItem}>Edit</td>
+        <td onClick= {this.removeItem}>Remove</td>
         <UpdateItem show={this.state.editing} hide={this.closeModal} {...this.props} />
       </tr>
     );

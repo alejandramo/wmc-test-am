@@ -57,11 +57,20 @@ function patchData (path, id, data){
   
 }
 
+function deleteData(path, id){
+  return fetch(
+    `${API_URL}/${path}/${id}`,
+    {
+      method: 'DELETE',
+    });
+}
+
+
 
 export {
   getData,
   getDataWithQuery,
   postData,
   patchData,
-  
+  deleteData,
 }

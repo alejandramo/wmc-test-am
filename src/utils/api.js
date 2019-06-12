@@ -31,9 +31,37 @@ function getDataWithQuery(queryObject, path) {
   return getData("users");
 }
 
+function postData(path,data) {
+  return fetch (
+  `${API_URL}/${path}`,
+  {
+    method:'POST',
+    headers: {
+      'Content-Type':'application/json',
+    },
+    body:JSON.stringify(data),
+  }).then(checkResponse).then(parseResponse).catch(handleError);
+  }
+
+
+function patchData (path, id, data){
+  return fetch (
+    `${API_URL}/${path}/${id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type' : 'application/json',
+      },
+      body:JSON.stringify(data),
+    }).then(checkResponse).then(parseResponse).catch()
+  
+}
 
 
 export {
   getData,
   getDataWithQuery,
+  postData,
+  patchData,
+  
 }

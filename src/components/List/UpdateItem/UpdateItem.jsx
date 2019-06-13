@@ -1,50 +1,56 @@
 import React, { Component } from 'react';
 
-// Components
-import UpdateItem from '../UpdateItem/UpdateItem';
+// Actions
+import { patchData } from '../../../utils/api';
 
-class Item extends Component {
+// Components
+import Modal from 'react-bootstrap/Modal';
+import Alert from 'react-bootstrap/Alert';
+import ItemForm from '../ItemForm/ItemForm';
+
+class UpdateItem extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      clicked: 0,
-      editing: false,
-    }
+      error: false,
+    };
 
-    this.increaseClick = this.increaseClick.bind(this);
-    this.editItem = this.editItem.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.showError = this.showError.bind(this);
+    this.update = this.update.bind(this);
   }
 
-  increaseClick() {
-    this.setState({clicked: this.state.clicked + 1});
-    this.props.changeLastClicked(this.props.id);
+  showError() {
+    this.setState({error: true});
   }
 
-  editItem() {
-    this.setState({editing: true});
-  }
-
-  closeModal() {
-    this.setState({editing: false});
-    this.props.updateList();
+  update(data) {
+    patchData('items', this.props.id, data).then(this.props.hide).catch(this.showError);
   }
 
   render() {
-    const {id, name, description, value} = this.props;
+    const {name, description, value} = this.props;
+    const alert = this.state.error && (<Alert variant="danger">Something went wrong</Alert>);
     return (
-      <tr onClick={this.increaseClick}>
-        <td>{id}</td>
-        <td>{name}</td>
-        <td>{description}</td>
-        <td>{value}</td>
-        <td>{this.state.clicked}</td>
-        <td>{this.props.id === this.props.lastClicked && 'Last Clicked'}</td>
-        <td onClick={this.editItem}>Edit</td>
-        <UpdateItem show={this.state.editing} hide={this.closeModal} {...this.props} />
-      </tr>
+      <Modal show={this.props.show} onHide={this.props.hide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <ItemForm submit={this.update} data={{name, description, value}} />
+        </Modal.Body>
+        {alert}
+      </Modal>
     );
   }
 }
 
-export default Item;
+export default UpdateItem;
+
+
+
+
+
+
+

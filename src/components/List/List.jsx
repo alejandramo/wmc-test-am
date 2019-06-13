@@ -43,9 +43,7 @@ class List extends Component {
     }
 
     renderItems(){
-        return 
-        []
-        /*
+        
         this.state.items.map((item, i) => (
             <Item
                 key = {`item-${i}`}
@@ -55,7 +53,7 @@ class List extends Component {
                 {...item}
             /> 
               
-        )); */
+        ));
     }
     
 
